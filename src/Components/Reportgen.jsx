@@ -35,7 +35,7 @@ import {
   CartesianGrid,
   Tooltip,
 } from "recharts";
-import SemiCircleProgressBar from "react-progressbar-semicircle";
+// import SemiCircleProgressBar from "react-progressbar-semicircle";
 
 const Reportgen = () => {
 

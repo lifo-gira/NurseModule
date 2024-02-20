@@ -39,7 +39,7 @@ import {
   Line,
 } from "recharts";
 
-import SemiCircleProgressBar from "react-progressbar-semicircle";
+// import SemiCircleProgressBar from "react-progressbar-semicircle";
 import Profilebar from "./Profilebar";
 
 const Report = ({ onDashboard, userId }) => {
@@ -1234,11 +1234,11 @@ const Report = ({ onDashboard, userId }) => {
                   </Typography>
                 </div>
                 <div className="flex flex-col justify-center items-center h-3/4">
-                  <SemiCircleProgressBar
+                  {/* <SemiCircleProgressBar
                     percentage={33}
                     strokeWidth={9}
                     diameter={140}
-                  />
+                  /> */}
                   <Typography
                     variant="h3"
                     color="black"
@@ -1260,11 +1260,11 @@ const Report = ({ onDashboard, userId }) => {
                   </Typography>
                 </div>
                 <div className="flex flex-col justify-center items-center h-3/4">
-                  <SemiCircleProgressBar
+                  {/* <SemiCircleProgressBar
                     percentage={75}
                     strokeWidth={9}
                     diameter={140}
-                  />
+                  /> */}
                   <Typography
                     variant="h3"
                     color="black"
