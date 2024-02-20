@@ -35,7 +35,6 @@ import {
   CartesianGrid,
   Tooltip,
 } from "recharts";
-import SemiCircleProgressBar from "react-progressbar-semicircle";
 
 const Dashboard = ({ onReportClick }) => {
   const [patients, setPatients] = useState([]);
