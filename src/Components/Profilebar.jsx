@@ -114,7 +114,7 @@ const Profilebar = () => {
         console.log(messageData, "HI");
         // Check if the flag is 1 in the received message
         console.log();
-        if (messageData.data.flag === -1) {
+        if (messageData.flag === -1) {
           // Increment the notification count when a new WebSocket message is received with flag 1
           setNotificationCount((prevCount) => prevCount + 1);
         }
