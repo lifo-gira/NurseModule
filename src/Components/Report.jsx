@@ -11,6 +11,7 @@ import {
   Drawer,
   Select,
   Option,
+  Button
 } from "@material-tailwind/react";
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
@@ -41,7 +42,49 @@ import {
 
 import Profilebar from "./Profilebar";
 
-const Report = ({ onDashboard, userId }) => {
+import {
+  CircularProgressbar,
+  buildStyles,
+  CircularProgressbarWithChildren,
+} from "react-circular-progressbar";
+import "react-circular-progressbar/dist/styles.css";
+
+const CustomBar = (props) => {
+  const { x, y, width, height, fill } = props;
+  const radius = 5; // Set the radius for the rounded corner
+  return (
+    <g>
+      <path
+        d={`M${x},${y + radius} L${x},${y + height} L${x + width},${
+          y + height
+        } L${x + width},${y + radius} Q${x + width},${y} ${
+          x + width - radius
+        },${y} L${x + radius},${y} Q${x},${y} ${x},${y + radius}`}
+        fill={fill}
+      />
+    </g>
+  );
+};
+
+const CustomBar1 = (props) => {
+  const { x, y, width, height, fill } = props;
+  const radius = 5; // Set the radius for the rounded corner
+  return (
+    <g>
+      {/* Render the bar with rounded bottom edges */}
+      <path
+        d={`M${x},${y} L${x},${y + height} L${x + width},${y + height} L${
+          x + width
+        },${y} Q${x + width},${y + radius} ${x + width - radius},${
+          y + radius
+        } L${x + radius},${y + radius} Q${x},${y + radius} ${x},${y} Z`}
+        fill={fill}
+      />
+    </g>
+  );
+};
+
+const Report = ({ onDashboard, userId,assement }) => {
   const [selectedOption, setSelectedOption] = useState("");
   const options = ["Option 1", "Option 2", "Option 3"];
 
@@ -77,7 +120,7 @@ const Report = ({ onDashboard, userId }) => {
           const newReportData = data.PersonalDetails.Reports;
           console.log(newReportData);
           setpatientDetails(newPatientDetailsData);
-          setdocumentId(data._id)
+          setdocumentId(data._id);
           setreport(newReportData);
           const runningExerciseData = data?.Exercises?.running.values || [];
           const squatsExerciseData = data?.Exercises?.squats.values || [];
@@ -107,7 +150,7 @@ const Report = ({ onDashboard, userId }) => {
     setPatients(patients);
     setpatientDetails(patientDetails);
     setreport(report);
-    setdocumentId(documentId)
+    setdocumentId(documentId);
     console.log("UserId:", documentId);
     console.log(report);
   }, [patients, patientDetails, report, documentId]);
@@ -149,136 +192,133 @@ const Report = ({ onDashboard, userId }) => {
 
   const data = [
     {
-      name: "Page A",
-      uv: 4000,
-      pv: 2400,
-      amt: 2400,
+      name: "11 Jun",
+      uv: -40,
+      pv: 24,
+      amt: 24,
     },
     {
-      name: "Page B",
-      uv: -3000,
-      pv: 1398,
-      amt: 2210,
+      uv: -30,
+      pv: 13,
+      amt: 22,
     },
     {
-      name: "Page C",
-      uv: -2000,
-      pv: -9800,
-      amt: 2290,
+      name: "12 Jun",
+      uv: -60,
+      pv: 98,
+      amt: 22,
     },
     {
-      name: "Page D",
-      uv: 2780,
-      pv: 3908,
-      amt: 2000,
+      uv: -27,
+      pv: 39,
+      amt: 20,
     },
     {
-      name: "Page E",
-      uv: -1890,
-      pv: 4800,
-      amt: 2181,
+      name: "13 Jun",
+      uv: -18,
+      pv: 50,
+      amt: 21,
     },
     {
-      name: "Page F",
-      uv: 2390,
-      pv: -3800,
-      amt: 2500,
+      uv: -23,
+      pv: 38,
+      amt: 25,
     },
     {
-      name: "Page G",
-      uv: 3490,
-      pv: 4300,
-      amt: 2100,
+      name: "14 Jun",
+      uv: -80,
+      pv: 43,
+      amt: 21,
     },
   ];
 
   const data1 = [
     {
-      name: "Page A",
-      uv: 4000,
-      pv: 2400,
-      amt: 2400,
+      name: "5k",
+      uv: 10,
+      pv: 4,
+      amt: 24,
     },
     {
-      name: "Page B",
-      uv: 3000,
-      pv: 1398,
-      amt: 2210,
+      name: "10k",
+      uv: 30,
+      pv: 63,
+      amt: 22,
     },
     {
-      name: "Page C",
-      uv: 2000,
-      pv: 9800,
-      amt: 2290,
+      name: "15k",
+      uv: 20,
+      pv: 98,
+      amt: 22,
     },
     {
-      name: "Page D",
-      uv: 2780,
-      pv: 3908,
-      amt: 2000,
+      name: "20k",
+      uv: 37,
+      pv: 19,
+      amt: 20,
     },
     {
-      name: "Page E",
-      uv: 1890,
-      pv: 4800,
-      amt: 2181,
+      name: "25k",
+      uv: 28,
+      pv: 38,
+      amt: 21,
     },
     {
-      name: "Page F",
-      uv: 2390,
-      pv: 3800,
-      amt: 2500,
+      name: "30k",
+      uv: 3,
+      pv: 48,
+      amt: 25,
     },
     {
-      name: "Page G",
-      uv: 3490,
-      pv: 4300,
-      amt: 2100,
+      name: "35k",
+      uv: 54,
+      pv: 43,
+      amt: 21,
     },
   ];
 
   const data2 = [
     {
-      name: "Page A",
-      uv: 4000,
-      pv: 2400,
-      amt: 2400,
+      name: "JAN",
+      uv: 40,
+      pv: 24,
+      amt: 24,
     },
     {
-      name: "Page B",
-      uv: 3000,
-      pv: 1398,
-      amt: 2210,
+      name: "FEB",
+      uv: 30,
+      pv: 13,
+      amt: 22,
     },
     {
-      name: "Page C",
-      uv: 2000,
-      pv: 9800,
-      amt: 2290,
+      name: "MAR",
+      uv: 20,
+      pv: 98,
+      amt: 22,
     },
     {
-      name: "Page D",
-      uv: 2780,
-      pv: 3908,
-      amt: 2000,
+      name: "APR",
+      uv: 27,
+      pv: 39,
+      amt: 20,
     },
     {
-      name: "Page E",
-      uv: 1890,
-      pv: 4800,
-      amt: 2181,
+      name: "MAY",
+      uv: 18,
+      pv: 48,
+      amt: 21,
     },
     {
-      name: "Page F",
-      uv: 2390,
-      pv: 3800,
-      amt: 2500,
+      name: "JUN",
+      uv: 23,
+      pv: 38,
+      amt: 25,
     },
     {
-      name: "Page G",
-      uv: 3490,
-      pv: 4300,
-      amt: 2100,
+      name: "JUL",
+      uv: 34,
+      pv: 43,
+      amt: 21,
     },
   ];
   const data4 = [
@@ -326,6 +366,33 @@ const Report = ({ onDashboard, userId }) => {
     },
   ];
 
+  const data5 = [
+    {
+      name: 2021,
+      uv: 20,
+      pv: 0,
+      amt: 2400,
+    },
+    {
+      name: 2022,
+      uv: 80,
+      pv: 60,
+      amt: 2210,
+    },
+    {
+      name: 2023,
+      uv: 50,
+      pv: 30,
+      amt: 2290,
+    },
+    {
+      name: 2024,
+      uv: 110,
+      pv: 90,
+      amt: 2290,
+    },
+  ];
+
   const [screenWidth, setScreenWidth] = useState(window.innerWidth);
   const [screenheight, setScreenHeight] = useState(window.innerHeight);
 
@@ -348,7 +415,14 @@ const Report = ({ onDashboard, userId }) => {
     };
   }, []);
 
-  const hangleFlag = (patient_id, newFlag, doctorName, doctorID,scheduled_date, meeting_id) => {
+  const hangleFlag = (
+    patient_id,
+    newFlag,
+    doctorName,
+    doctorID,
+    scheduled_date,
+    meeting_id
+  ) => {
     console.log(doctorName);
     fetch(
       `http://127.0.0.1:8000/update_flag/${patient_id}/${newFlag}/${doctorName}/${doctorID}/${scheduled_date}/${meeting_id}`,
@@ -382,7 +456,14 @@ const Report = ({ onDashboard, userId }) => {
   const handleUpdate = () => {
     // Your logic to handle the update here
     console.log("Selected doctor:", selectedDoctor);
-    hangleFlag(userId, 0, selectedDoctor, selectedId, formattedDateTime, documentId);
+    hangleFlag(
+      userId,
+      0,
+      selectedDoctor,
+      selectedId,
+      formattedDateTime,
+      documentId
+    );
     <Profilebar />;
   };
 
@@ -402,7 +483,7 @@ const Report = ({ onDashboard, userId }) => {
 
   const [showDateTimePicker, setShowDateTimePicker] = useState(false);
   const [selectedDate, setSelectedDate] = useState(new Date());
-  const [selectedTime, setSelectedTime] = useState('12:00');
+  const [selectedTime, setSelectedTime] = useState("12:00");
   const [formattedDateTime, setFormattedDateTime] = useState(null); // State to hold formatted date and time
 
   const handleButtonClick = () => {
@@ -421,8 +502,8 @@ const Report = ({ onDashboard, userId }) => {
 
   const updateCombinedDateTime = (date, time) => {
     const combined = new Date(date);
-    combined.setHours(time.split(':')[0]);
-    combined.setMinutes(time.split(':')[1]);
+    combined.setHours(time.split(":")[0]);
+    combined.setMinutes(time.split(":")[1]);
 
     const year = combined.getFullYear();
     const month = combined.getMonth() + 1;
@@ -432,9 +513,8 @@ const Report = ({ onDashboard, userId }) => {
 
     const formattedDateTime = `(${year}, ${month}, ${day}, ${hours}, ${minutes})`; // Create formatted date and time
     setFormattedDateTime(formattedDateTime); // Update state with formatted date and time
-    console.log('Combined DateTime:', formattedDateTime);
+    console.log("Combined DateTime:", formattedDateTime);
   };
-
 
   return (
     <div className={`w-full h-full bg-gray-200`}>
@@ -442,7 +522,7 @@ const Report = ({ onDashboard, userId }) => {
         <div
           className={`w-full h-1/5 rounded-b-3xl flex flex-row bg-gradient-to-r from-cyan-200 to-cyan-400 py-2`}
         >
-          <div className={`w-1/2 h-full px-8`}>
+          <div className={`w-1/2 h-full px-8 flex flex-row`}>
             <div className={`w-5/6 h-full  flex flex-row`}>
               <div className={`w-1/3 h-full flex items-center justify-center`}>
                 <Avatar
@@ -453,19 +533,29 @@ const Report = ({ onDashboard, userId }) => {
                   className="border border-white shadow-xl  ring-2 ring-white"
                 />
               </div>
-              <div
-                className={`w-2/3 h-full  text-start flex flex-col justify-center`}
-              >
-                <Typography variant="h5" color="white">
+              <div className={`w-2/3 h-full  text-start flex flex-col justify-center`} >
+                <Typography variant="h5" color="white" className="font-poppins">
                   {patients.user_id}
                 </Typography>
-                <Typography variant="h7" color="white" className="font-medium">
+                <Typography
+                  variant="h7"
+                  color="white"
+                  className="font-medium font-poppins"
+                >
                   32 , {patientDetails.Gender}
                 </Typography>
-                <Typography variant="h7" color="white" className="font-medium">
+                <Typography
+                  variant="h7"
+                  color="white"
+                  className="font-medium font-poppins"
+                >
                   ID: 123456
                 </Typography>
-                <Typography variant="h7" color="white" className="font-medium">
+                <Typography
+                  variant="h7"
+                  color="white"
+                  className="font-medium font-poppins"
+                >
                   {report.map((report, index) => (
                     <div key={index}>
                       {report && (
@@ -478,14 +568,34 @@ const Report = ({ onDashboard, userId }) => {
                   ))}
                 </Typography>
               </div>
+              
             </div>
+            <div className={`w-1/6`}>
+            <Button className="w-full h-full items-center justify-center gap-2 font-poppins flex flex-col" onClick={assement}>
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    fill="none"
+                    viewBox="0 0 24 24"
+                    strokeWidth={2}
+                    stroke="currentColor"
+                    className="h-5 w-5"
+                  >
+                    <path
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                      d="M17.593 3.322c1.1.128 1.907 1.077 1.907 2.185V21L12 17.25 4.5 21V5.507c0-1.108.806-2.057 1.907-2.185a48.507 48.507 0 0111.186 0z"
+                    />
+                  </svg>
+                  View Assessment Report
+                </Button>
+              </div>
           </div>
           <div className={`w-1/2 h-full flex flex-col px-8`}>
             <div className={`w-5/6 h-2/3  flex flex-row ml-auto`}>
               <div
                 className={`w-3/4 h-full  flex flex-col text-end justify-center`}
               >
-                <Typography variant="h4" color="white">
+                <Typography variant="h4" color="white" className="font-poppins">
                   {patients.doctor_assigned
                     ? patients.doctor_assigned
                     : "Doctor not assigned"}
@@ -506,10 +616,55 @@ const Report = ({ onDashboard, userId }) => {
               </div>
             </div>
 
-            <div className={`w-5/6 h-1/3  flex ml-auto`}>
-              <div className={`w-3/4 flex ml-auto justify-center items-center`}>
+            <div className={`w-full h-1/3  flex flex-row ml-auto`}>
+              
+              <div className={`w-2/3 flex justify-start`}>
+                
+                {!showDateTimePicker && (
+                  <button
+                    className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded-lg font-poppins"
+                    onClick={handleButtonClick}
+                  >
+                    {showDateTimePicker
+                      ? "Hide"
+                      : "Date & Time"}
+                  </button>
+                )}
+                {showDateTimePicker && (
+                  <div className={`w-full h-full flex items-center`}>
+                    <div
+                      className={`w-full gap-4 flex ml-auto flex-row justify-center items-center`}
+                    >
+                      {/* Date Calendar */}
+                      <DatePicker
+                        selected={selectedDate}
+                        onChange={handleDateChange}
+                        className="bg-white rounded-lg w-full p-0.5 font-poppins"
+                      />
+                      {/* Time Picker */}
+                      <TimePicker
+                        disableClock={true}
+                        value={selectedTime}
+                        onChange={handleTimeChange}
+                        className="bg-white rounded-lg w-1/2 font-poppins"
+                      />
+                    </div>
+                  </div>
+                )}
+              </div>
+              <div className={`w-1/3 flex justify-center`}>
+                <button
+                  className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded-lg font-poppins"
+                  onClick={handleUpdate}
+                >
+                  Update
+                </button>
+              </div>
+              <div
+                className={`w-1/3 flex ml-auto justify-center items-center font-poppins`}
+              >
                 <Select
-                  label="Doctors Available to Check"
+                  label="Doctors Available"
                   className="bg-white rounded-lg"
                   // value={selectedDoctor}
                   onChange={handleSelectedDoctorChange}
@@ -522,52 +677,11 @@ const Report = ({ onDashboard, userId }) => {
                 </Select>
               </div>
             </div>
-            
-            <div className="mt-2 ml-auto flex flex-row w-full gap-4">
-              <div className="w-1/2 h-full">
-              {!showDateTimePicker && (
-              <button
-                className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded-lg"
-                onClick={handleButtonClick}
-              >
-                {showDateTimePicker
-                  ? "Hide Date & Time Picker"
-                  : "Show Date & Time Picker"}
-              </button>
-              )}
-                          {showDateTimePicker && (
-              <div className={`w-full h-full`}>
-                <div
-                  className={`w-full gap-4 flex ml-auto flex flex-row justify-center items-center`}
-                >
-                  {/* Date Calendar */}
-                  <DatePicker
-                    selected={selectedDate}
-                    onChange={handleDateChange}
-                    className="bg-white rounded-lg w-full p-0.5"
-                  />
-                  {/* Time Picker */}
-                  <TimePicker
-                  disableClock={true}
-                    value={selectedTime}
-                    onChange={handleTimeChange}
-                    className="bg-white rounded-lg w-1/2"
-                  />
-                </div>
-              </div>
-            )}
-              </div>
-             <div className="w-1/2 h-full">
-             <button
-                className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded-lg"
-                onClick={handleUpdate}
-              >
-                Update
-              </button>
-             </div>
-              
-            </div>
 
+            <div className="mt-2 ml-auto flex flex-row w-full gap-4">
+              <div className="w-1/2 h-full"></div>
+              <div className="w-1/2 h-full"></div>
+            </div>
           </div>
         </div>
       )}
@@ -589,16 +703,28 @@ const Report = ({ onDashboard, userId }) => {
               <div
                 className={`w-2/3 h-full  text-start flex flex-col justify-center`}
               >
-                <Typography variant="h5" color="white">
+                <Typography variant="h5" color="white" className="font-poppins">
                   {patients.user_id}
                 </Typography>
-                <Typography variant="h6" color="white" className="font-medium">
+                <Typography
+                  variant="h6"
+                  color="white"
+                  className="font-medium font-poppins"
+                >
                   32 , {patientDetails.Gender}
                 </Typography>
-                <Typography variant="h7" color="white" className="font-medium">
+                <Typography
+                  variant="h7"
+                  color="white"
+                  className="font-medium font-poppins"
+                >
                   ID: 123456
                 </Typography>
-                <Typography variant="h7" color="white" className="font-medium">
+                <Typography
+                  variant="h7"
+                  color="white"
+                  className="font-medium font-poppins"
+                >
                   {report.map((report, index) => (
                     <div key={index}>
                       {report && (
@@ -617,7 +743,12 @@ const Report = ({ onDashboard, userId }) => {
             className={`w-1/5 h-full px-8  flex flex-col items-center justify-center`}
           >
             <ArrowUturnLeftIcon className="w-16 h-16" onClick={onDashboard} />
-            <Typography variant="h5" color="white" onClick={onDashboard}>
+            <Typography
+              variant="h5"
+              color="white"
+              onClick={onDashboard}
+              className="font-poppins"
+            >
               Back to Dashboard
             </Typography>
           </div>
@@ -626,7 +757,7 @@ const Report = ({ onDashboard, userId }) => {
               <div
                 className={`w-3/4 h-full  flex flex-col text-end justify-center`}
               >
-                <Typography variant="h4" color="white">
+                <Typography variant="h4" color="white" className="font-poppins">
                   {patients.doctor_assigned
                     ? patients.doctor_assigned
                     : "Doctor not assigned"}
@@ -647,7 +778,9 @@ const Report = ({ onDashboard, userId }) => {
             </div>
 
             <div className={`w-full h-1/3  flex ml-auto`}>
-              <div className={`w-3/4 flex ml-auto justify-center items-center`}>
+              <div
+                className={`w-3/4 flex ml-auto justify-center items-center font-poppins`}
+              >
                 <Select
                   label="Doctors Available to Check"
                   className="bg-white rounded-lg"
@@ -671,20 +804,20 @@ const Report = ({ onDashboard, userId }) => {
                   <DatePicker
                     selected={selectedDate}
                     onChange={handleDateChange}
-                    className="bg-white rounded-lg"
+                    className="bg-white rounded-lg font-poppins"
                   />
                   {/* Time Picker */}
                   <TimePicker
                     value={selectedTime}
                     onChange={handleTimeChange}
-                    className="bg-white rounded-lg ml-2"
+                    className="bg-white rounded-lg ml-2 font-poppins"
                   />
                 </div>
               </div>
             )}
             <div className="mt-2 ml-auto">
               <button
-                className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded"
+                className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded font-poppins"
                 onClick={handleButtonClick}
               >
                 {showDateTimePicker
@@ -692,7 +825,7 @@ const Report = ({ onDashboard, userId }) => {
                   : "Show Date & Time Picker"}
               </button>
               <button
-                className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded"
+                className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded font-poppins"
                 onClick={handleUpdate}
               >
                 Update
@@ -709,7 +842,12 @@ const Report = ({ onDashboard, userId }) => {
             className={`w-full h-1/6 px-8  flex flex-col items-center justify-center`}
           >
             <ArrowUturnLeftIcon className="w-16 h-16" onClick={onDashboard} />
-            <Typography variant="h5" color="white" onClick={onDashboard}>
+            <Typography
+              variant="h5"
+              color="white"
+              onClick={onDashboard}
+              className="font-poppins"
+            >
               Back to Dashboard
             </Typography>
           </div>
@@ -730,13 +868,17 @@ const Report = ({ onDashboard, userId }) => {
                 <div
                   className={`w-2/3 h-full  text-start flex flex-col justify-center`}
                 >
-                  <Typography variant="h5" color="white">
+                  <Typography
+                    variant="h5"
+                    color="white"
+                    className="font-poppins"
+                  >
                     {patients.user_id}
                   </Typography>
                   <Typography
                     variant="h7"
                     color="white"
-                    className="font-medium"
+                    className="font-medium font-poppins"
                   >
                     32 , {patientDetails.Gender}
                   </Typography>
@@ -750,7 +892,7 @@ const Report = ({ onDashboard, userId }) => {
                   <Typography
                     variant="h7"
                     color="white"
-                    className="font-medium"
+                    className="font-medium font-poppins"
                   >
                     {report.map((report, index) => (
                       <div key={index}>
@@ -772,7 +914,11 @@ const Report = ({ onDashboard, userId }) => {
                 <div
                   className={`w-3/4 h-full  flex flex-col text-end justify-center`}
                 >
-                  <Typography variant="h4" color="white">
+                  <Typography
+                    variant="h4"
+                    color="white"
+                    className="font-poppins"
+                  >
                     {patients.doctor_assigned
                       ? patients.doctor_assigned
                       : "Doctor not assigned"}
@@ -800,7 +946,7 @@ const Report = ({ onDashboard, userId }) => {
                 >
                   <Select
                     label="Doctors Available to Check"
-                    className="bg-white rounded-lg"
+                    className="bg-white rounded-lg font-poppins"
                     // value={selectedDoctor}
                     onChange={handleSelectedDoctorChange}
                   >
@@ -821,20 +967,20 @@ const Report = ({ onDashboard, userId }) => {
                 <DatePicker
                   selected={selectedDate}
                   onChange={handleDateChange}
-                  className="bg-white rounded-lg"
+                  className="bg-white rounded-lg font-poppins"
                 />
                 {/* Time Picker */}
                 <TimePicker
                   value={selectedTime}
                   onChange={handleTimeChange}
-                  className="bg-white rounded-lg ml-2"
+                  className="bg-white rounded-lg ml-2 font-poppins"
                 />
               </div>
             </div>
           )}
           <div className="mt-2">
             <button
-              className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded"
+              className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded font-poppins"
               onClick={handleButtonClick}
             >
               {showDateTimePicker
@@ -842,7 +988,7 @@ const Report = ({ onDashboard, userId }) => {
                 : "Show Date & Time Picker"}
             </button>
             <button
-              className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded"
+              className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded font-poppins"
               onClick={handleUpdate}
             >
               Update
@@ -858,7 +1004,12 @@ const Report = ({ onDashboard, userId }) => {
             className={`w-full h-1/5 px-8  flex flex-col items-end justify-center`}
           >
             <ArrowUturnLeftIcon className="w-16 h-16" onClick={onDashboard} />
-            <Typography variant="h5" color="white" onClick={onDashboard}>
+            <Typography
+              variant="h5"
+              color="white"
+              onClick={onDashboard}
+              className="font-poppins"
+            >
               Back to Dashboard
             </Typography>
           </div>
@@ -876,16 +1027,28 @@ const Report = ({ onDashboard, userId }) => {
               <div
                 className={`w-2/3 h-full  text-start flex flex-col justify-center`}
               >
-                <Typography variant="h5" color="white">
+                <Typography variant="h5" color="white" className="font-poppins">
                   {patients.user_id}
                 </Typography>
-                <Typography variant="h7" color="white" className="font-medium">
+                <Typography
+                  variant="h7"
+                  color="white"
+                  className="font-medium font-poppins"
+                >
                   32 , {patientDetails.Gender}
                 </Typography>
-                <Typography variant="h7" color="white" className="font-medium">
+                <Typography
+                  variant="h7"
+                  color="white"
+                  className="font-medium font-poppins"
+                >
                   ID: 123456
                 </Typography>
-                <Typography variant="h7" color="white" className="font-medium">
+                <Typography
+                  variant="h7"
+                  color="white"
+                  className="font-medium font-poppins"
+                >
                   {report.map((report, index) => (
                     <div key={index}>
                       {report && (
@@ -906,7 +1069,7 @@ const Report = ({ onDashboard, userId }) => {
               <div
                 className={`w-3/4 h-full  flex flex-col text-end justify-center`}
               >
-                <Typography variant="h4" color="white">
+                <Typography variant="h4" color="white" className="font-poppins">
                   {patients.doctor_assigned
                     ? patients.doctor_assigned
                     : "Doctor not assigned"}
@@ -930,7 +1093,7 @@ const Report = ({ onDashboard, userId }) => {
               <div className={`w-3/4 flex ml-auto justify-center items-center`}>
                 <Select
                   label="Doctors Available to Check"
-                  className="bg-white rounded-lg"
+                  className="bg-white rounded-lg font-poppins"
                   // value={selectedDoctor}
                   onChange={handleSelectedDoctorChange}
                 >
@@ -951,20 +1114,20 @@ const Report = ({ onDashboard, userId }) => {
                   <DatePicker
                     selected={selectedDate}
                     onChange={handleDateChange}
-                    className="bg-white rounded-lg"
+                    className="bg-white rounded-lg font-poppins"
                   />
                   {/* Time Picker */}
                   <TimePicker
                     value={selectedTime}
                     onChange={handleTimeChange}
-                    className="bg-white rounded-lg ml-2"
+                    className="bg-white rounded-lg ml-2 font-poppins"
                   />
                 </div>
               </div>
             )}
             <div className="mt-2 ml-auto">
               <button
-                className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded"
+                className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded font-poppins"
                 onClick={handleButtonClick}
               >
                 {showDateTimePicker
@@ -972,7 +1135,7 @@ const Report = ({ onDashboard, userId }) => {
                   : "Show Date & Time Picker"}
               </button>
               <button
-                className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded"
+                className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded font-poppins"
                 onClick={handleUpdate}
               >
                 Update
@@ -989,7 +1152,12 @@ const Report = ({ onDashboard, userId }) => {
             className={`w-full h-[5rem] px-8  flex flex-col items-center justify-center`}
           >
             <ArrowUturnLeftIcon className="w-12 h-12" onClick={onDashboard} />
-            <Typography variant="h5" color="white" onClick={onDashboard}>
+            <Typography
+              variant="h5"
+              color="white"
+              onClick={onDashboard}
+              className="font-poppins"
+            >
               Back to Dashboard
             </Typography>
           </div>
@@ -1009,16 +1177,28 @@ const Report = ({ onDashboard, userId }) => {
               <div
                 className={`w-full h-full  text-center flex flex-col justify-center`}
               >
-                <Typography variant="h5" color="white">
+                <Typography variant="h5" color="white" className="font-poppins">
                   {patients.user_id}
                 </Typography>
-                <Typography variant="h7" color="white" className="font-medium">
+                <Typography
+                  variant="h7"
+                  color="white"
+                  className="font-medium font-poppins"
+                >
                   32 , {patientDetails.Gender}
                 </Typography>
-                <Typography variant="h7" color="white" className="font-medium">
+                <Typography
+                  variant="h7"
+                  color="white"
+                  className="font-medium font-poppins"
+                >
                   ID: 123456
                 </Typography>
-                <Typography variant="h7" color="white" className="font-medium">
+                <Typography
+                  variant="h7"
+                  color="white"
+                  className="font-medium font-poppins"
+                >
                   {report.map((report, index) => (
                     <div key={index}>
                       {report && (
@@ -1054,7 +1234,7 @@ const Report = ({ onDashboard, userId }) => {
               <div
                 className={`w-full h-full  flex flex-col text-center justify-center`}
               >
-                <Typography variant="h4" color="white">
+                <Typography variant="h4" color="white" className="font-poppins">
                   {patients.doctor_assigned
                     ? patients.doctor_assigned
                     : "Doctor not assigned"}
@@ -1069,7 +1249,7 @@ const Report = ({ onDashboard, userId }) => {
               <div className={`w-full flex  justify-center items-center`}>
                 <Select
                   label="Doctors Available to Check"
-                  className="bg-white rounded-lg"
+                  className="bg-white rounded-lg font-poppins"
                   value={selectedDoctor}
                   onChange={handleSelectedDoctorChange}
                 >
@@ -1090,20 +1270,20 @@ const Report = ({ onDashboard, userId }) => {
                   <DatePicker
                     selected={selectedDate}
                     onChange={handleDateChange}
-                    className="bg-white rounded-lg"
+                    className="bg-white rounded-lg font-poppins"
                   />
                   {/* Time Picker */}
                   <TimePicker
                     value={selectedTime}
                     onChange={handleTimeChange}
-                    className="bg-white rounded-lg ml-2"
+                    className="bg-white rounded-lg ml-2 font-poppins"
                   />
                 </div>
               </div>
             )}
             <div className="mt-2 ml-auto">
               <button
-                className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded"
+                className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded font-poppins"
                 onClick={handleButtonClick}
               >
                 {showDateTimePicker
@@ -1111,7 +1291,7 @@ const Report = ({ onDashboard, userId }) => {
                   : "Show Date & Time Picker"}
               </button>
               <button
-                className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded"
+                className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded font-poppins"
                 onClick={handleUpdate}
               >
                 Update
@@ -1126,7 +1306,7 @@ const Report = ({ onDashboard, userId }) => {
         }`}
       >
         <div className={`h-full ${screenWidth < 1180 ? "w-full" : "w-1/2"}`}>
-          <div className={`w-full h-2/5  py-2 px-3`}>
+          <div className={`w-full h-2/6  py-2 px-3`}>
             <Card
               color="transparent"
               shadow={true}
@@ -1135,7 +1315,7 @@ const Report = ({ onDashboard, userId }) => {
               <Typography
                 variant="h6"
                 color="black"
-                className="flex text-start px-8"
+                className="flex text-start px-8 font-poppins"
               >
                 Pain Score
               </Typography>
@@ -1152,20 +1332,19 @@ const Report = ({ onDashboard, userId }) => {
                       bottom: 5,
                     }}
                   >
-                    <CartesianGrid horizontal={true} vertical={false} />
                     <XAxis dataKey="name" />
                     <YAxis />
                     <Tooltip />
 
                     <ReferenceLine y={0} stroke="#000" />
-                    <Bar dataKey="pv" fill="#8884d8" />
-                    <Bar dataKey="uv" fill="#82ca9d" />
+                    <Bar dataKey="pv" fill="#435fe2" shape={<CustomBar />} />
+                    <Bar dataKey="uv" fill="#e28743" shape={<CustomBar1 />} />
                   </BarChart>
                 </ResponsiveContainer>
               </div>
             </Card>
           </div>
-          <div className={`w-full h-2/5 bg-gray-200 py-2 px-3`}>
+          <div className={`w-full h-2/6 bg-gray-200 py-2 px-3`}>
             <Card
               color="transparent"
               shadow={true}
@@ -1174,7 +1353,7 @@ const Report = ({ onDashboard, userId }) => {
               <Typography
                 variant="h6"
                 color="black"
-                className="flex text-start px-8"
+                className="flex text-start px-8 font-poppins"
               >
                 Pain Score
               </Typography>
@@ -1182,7 +1361,7 @@ const Report = ({ onDashboard, userId }) => {
                 <ResponsiveContainer width="100%" height="100%">
                   <AreaChart
                     width={500}
-                    height={400}
+                    height={300}
                     data={data1}
                     margin={{
                       top: 10,
@@ -1199,68 +1378,90 @@ const Report = ({ onDashboard, userId }) => {
                       type="monotone"
                       dataKey="uv"
                       stackId="1"
-                      stroke="#8884d8"
-                      fill="#8884d8"
+                      stroke="#e29743"
+                      fill="#e29743"
+                      strokeWidth={0}
                     />
                     <Area
                       type="monotone"
                       dataKey="pv"
                       stackId="1"
-                      stroke="#82ca9d"
-                      fill="#82ca9d"
-                    />
-                    <Area
-                      type="monotone"
-                      dataKey="amt"
-                      stackId="1"
-                      stroke="#ffc658"
-                      fill="#ffc658"
+                      stroke="#efa1f1"
+                      fill="#efa1f1"
+                      strokeWidth={0}
                     />
                   </AreaChart>
                 </ResponsiveContainer>
               </div>
             </Card>
           </div>
-          <div className={`w-full h-1/5  flex flex-row gap-4 px-3 py-2`}>
-            <div className={`w-1/2 h-full`}>
-              <Card className="bg-white w-full h-full flex flex-col p-4">
+          <div className={`w-full h-2/6  flex flex-row gap-4 px-3 py-2`}>
+            <div className={`w-2/3 h-full`}>
+              <Card className="bg-white w-full h-full flex flex-col p-2">
                 <div className="h-1/4 flex flex-row justify-between items-center">
-                  <Typography variant="h6" color="black" className="text-start">
-                    Pain Score
+                  <Typography
+                    variant="h6"
+                    color="black"
+                    className="text-start text-sm font-poppins"
+                  >
+                    ROM
                   </Typography>
-                  <Typography variant="h7" color="black" className="text-start">
+                  <Typography
+                    variant="h7"
+                    color="black"
+                    className="text-start text-sm font-poppins"
+                  >
                     Left Leg
                   </Typography>
                 </div>
                 <div className="flex flex-col justify-center items-center h-3/4">
-                  <Typography
-                    variant="h3"
-                    color="black"
-                    className="text-start mt-[-2rem] "
-                  >
-                    33
-                  </Typography>
+                  <CircularProgressbar
+                    value={75}
+                    text={75}
+                    circleRatio={0.75}
+                    styles={buildStyles({
+                      rotation: 1 / 2 + 1 / 8,
+                      trailColor: "#eee",
+                      pathColor: "red",
+                      textColor: "black",
+                      textSize: "22px",
+                    })}
+                  />
                 </div>
               </Card>
             </div>
-            <div className={`w-1/2 h-full`}>
-              <Card className="bg-white w-full h-full flex flex-col p-4">
+
+            <div className={`w-2/3 h-full`}>
+              <Card className="bg-white w-full h-full flex flex-col p-2">
                 <div className="h-1/4 flex flex-row justify-between items-center">
-                  <Typography variant="h6" color="black" className="text-start">
-                    Pain Score
+                  <Typography
+                    variant="h6"
+                    color="black"
+                    className="text-start text-sm font-poppins"
+                  >
+                    ROM
                   </Typography>
-                  <Typography variant="h7" color="black" className="text-start">
+                  <Typography
+                    variant="h7"
+                    color="black"
+                    className="text-start text-sm font-poppins"
+                  >
                     Right Leg
                   </Typography>
                 </div>
                 <div className="flex flex-col justify-center items-center h-3/4">
-                  <Typography
-                    variant="h3"
-                    color="black"
-                    className="text-start mt-[-2rem] "
-                  >
-                    33
-                  </Typography>
+                  <CircularProgressbar
+                    value={64}
+                    text={64}
+                    circleRatio={0.75}
+                    styles={buildStyles({
+                      rotation: 1 / 2 + 1 / 8,
+                      trailColor: "#eee",
+                      pathColor: "cyan",
+                      textColor: "black",
+                      textSize: "22px",
+                    })}
+                  />
                 </div>
               </Card>
             </div>
@@ -1278,21 +1479,39 @@ const Report = ({ onDashboard, userId }) => {
               shadow={true}
               className="w-full h-full bg-white flex flex-col gap-2 pt-2"
             >
-              <div className="w-full flex flex-col">
-                <Typography
-                  variant="h6"
-                  color="black"
-                  className="flex text-start px-5"
-                >
-                  Sugar Level
-                </Typography>
-                <Typography
-                  variant="h7"
-                  color="black"
-                  className="flex text-start px-5"
-                >
-                  220 mg/dl
-                </Typography>
+              <div className={`w-full flex flex-row`}>
+                <div className="w-1/2 flex flex-col">
+                  <Typography
+                    variant="h7"
+                    color="gray"
+                    className="flex text-start px-5 font-normal font-poppins"
+                  >
+                    Sugar Level
+                  </Typography>
+                  <Typography
+                    variant="h5"
+                    color="black"
+                    className="flex text-start px-5 font-poppins"
+                  >
+                    220 mg/dl
+                  </Typography>
+                </div>
+                <div className="w-1/2 flex flex-col items-end">
+                  <Typography
+                    variant="h6"
+                    color="black"
+                    className="flex text-start px-5 font-semibold font-poppins"
+                  >
+                    25%
+                  </Typography>
+                  <Typography
+                    variant="h6"
+                    color="gray"
+                    className="flex text-start px-5 font-poppins"
+                  >
+                    VS LAST MONTH
+                  </Typography>
+                </div>
               </div>
               <div className="w-full h-full">
                 <ResponsiveContainer width="100%" height="100%">
@@ -1307,15 +1526,25 @@ const Report = ({ onDashboard, userId }) => {
                       bottom: 0,
                     }}
                   >
-                    <CartesianGrid strokeDasharray="3 3" />
+                    <defs>
+                      <linearGradient id="colorUv" x1="0" y1="0" x2="0" y2="1">
+                        <stop offset="5%" stopColor="red" stopOpacity={0.5} />
+                        <stop
+                          offset="95%"
+                          stopColor="transparent"
+                          stopOpacity={0}
+                        />
+                      </linearGradient>
+                    </defs>
+                    <CartesianGrid strokeDasharray={"10 5"} />
                     <XAxis dataKey="name" />
                     <YAxis />
                     <Tooltip />
                     <Area
-                      type="monotone"
                       dataKey="uv"
-                      stroke="#8884d8"
-                      fill="#8884d8"
+                      stroke="red"
+                      strokeWidth={2}
+                      fill="url(#colorUv)"
                     />
                   </AreaChart>
                 </ResponsiveContainer>
@@ -1331,36 +1560,38 @@ const Report = ({ onDashboard, userId }) => {
               <Typography
                 variant="h6"
                 color="black"
-                className="flex text-start px-5"
+                className="flex text-start px-5 font-poppins"
               >
                 Patient Analytics
               </Typography>
               <div className="w-full h-full">
                 <ResponsiveContainer width="100%" height="100%">
                   <LineChart
-                    width={500}
-                    height={300}
-                    data={combinedChartData}
+                    width={700}
+                    height={700}
+                    data={data5}
                     margin={{
-                      top: 5,
+                      top: 10,
                       right: 30,
-                      left: 20,
-                      bottom: 5,
+                      left: -10,
+                      bottom: 0,
                     }}
                   >
-                    <CartesianGrid strokeDasharray="3 3" />
                     <XAxis dataKey="name" />
                     <YAxis />
                     <Tooltip />
-                    <Legend />
-                    <Line type="monotone" dataKey="Running" stroke="#82ca9d" />
-                    <Line type="monotone" dataKey="Squats" stroke="#8884d8" />
-                    <Line type="monotone" dataKey="Pushups" stroke="#ff7300" />
-                    <Line type="monotone" dataKey="Pullups" stroke="#0088aa" />
                     <Line
                       type="monotone"
-                      dataKey="LegHipRotation"
-                      stroke="#FF0000"
+                      dataKey="pv"
+                      stroke="#8884d8"
+                      strokeWidth={4}
+                      strokeDasharray={"25 4"}
+                    />
+                    <Line
+                      type="monotone"
+                      dataKey="uv"
+                      stroke="#82ca9d"
+                      strokeWidth={4}
                     />
                   </LineChart>
                 </ResponsiveContainer>

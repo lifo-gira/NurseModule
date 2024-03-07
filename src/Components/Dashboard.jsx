@@ -22,6 +22,7 @@ import {
   ChevronRightIcon,
   ArrowUpRightIcon,
   UserCircleIcon,
+  ChevronDownIcon,
 } from "@heroicons/react/24/solid";
 import {
   RadialBarChart,
@@ -154,8 +155,8 @@ const Dashboard = ({ onReportClick }) => {
 
   return (
     <>
-      {loading ? (
-        <p>Loading...</p>
+      {false ? (
+        <p className="font-poppins">Loading...</p>
       ) : (
         <div
           className={`w-full h-full  ${
@@ -174,13 +175,13 @@ const Dashboard = ({ onReportClick }) => {
                   : "h-16 flex flex-row justify-between"
               }`}
             >
-              <Typography variant="h3" color="blue-gray">
+              <Typography variant="h3" color="blue-gray" className="font-poppins">
                 List of Patients
               </Typography>
               <div
                 className={`flex flex-row justify-between gap-2 items-center cursor-pointer`}
               >
-                <Typography variant="h5" color="cyan">
+                <Typography variant="h5" color="cyan" className="font-poppins">
                   View all
                 </Typography>
                 <ChevronRightIcon className="w-4 h-4" />
@@ -209,17 +210,17 @@ const Dashboard = ({ onReportClick }) => {
                         />
                         <div className="flex w-full flex-col">
                           <div className="flex items-center justify-between">
-                            <Typography variant="h5" color="blue-gray">
+                            <Typography variant="h5" color="blue-gray" className="font-poppins">
                               {item.user_id}
                             </Typography>
                           </div>
-                          <Typography color="blue-gray" className="text-start">
+                          <Typography color="blue-gray" className="text-start font-poppins">
                             25,{item.PersonalDetails.PatientDetails.Gender}
                           </Typography>
                         </div>
                       </div>
                     </div>
-                    <div className={`w-1/6 text-base font-medium`}>
+                    <div className={`w-1/6 text-base font-medium font-poppins`}>
                       ID: #{item.user_id[0]}
                       {item.user_id[1]}
                       {item.user_id[2]}-
@@ -227,7 +228,7 @@ const Dashboard = ({ onReportClick }) => {
                     </div>
                     <div className={`w-2/6  flex flex-row  `}>
                       <div
-                        className={`rounded-lg py-0.5 font-medium w-1/2 px-4 ${
+                        className={`rounded-lg py-0.5 font-medium w-1/2 px-4 font-poppins ${
                           item.flag === 0
                             ? "text-blue-900 bg-blue-300"
                             : "text-red-900 bg-red-500 bg-opacity-40"
@@ -239,7 +240,7 @@ const Dashboard = ({ onReportClick }) => {
                         className={`flex flex-row gap-1 items-center justify-end px-4 w-1/2 `}
                       >
                         <div
-                          className={`text-base font-medium border-b-2 border-blue-gray-500 cursor-pointer`}
+                          className={`text-base font-medium border-b-2 border-blue-gray-500 cursor-pointer font-poppins`}
                           onClick={() => onReportClick(item.patient_id)}
                         >
                           Report
@@ -273,11 +274,11 @@ const Dashboard = ({ onReportClick }) => {
                         />
                         <div className="flex w-full flex-col gap-4">
                           <div className="flex items-center justify-between">
-                            <Typography variant="h5" color="blue-gray">
+                            <Typography variant="h5" color="blue-gray" className="font-poppins">
                             {item.user_id}
                             </Typography>
                           </div>
-                          <Typography color="blue-gray" className="text-start">
+                          <Typography color="blue-gray" className="text-start font-poppins">
                           25,{item.PersonalDetails.PatientDetails.Gender}
                           </Typography>
                         </div>
@@ -285,7 +286,7 @@ const Dashboard = ({ onReportClick }) => {
                     </div>
                     <div className={`w-1/2 h-full flex flex-col gap-4`}>
                       <div
-                        className={`h-1/6 w-full text-base font-medium text-start`}
+                        className={`h-1/6 w-full text-base font-medium text-start font-poppins`}
                       >
                         ID: #{item.user_id[0]}
                       {item.user_id[1]}
@@ -294,7 +295,7 @@ const Dashboard = ({ onReportClick }) => {
                       </div>
                       <div className={`h-2/6 w-full flex flex-row  `}>
                         <div
-                          className={` rounded-lg py-0.5 font-medium  w-1/2 px-4 ${
+                          className={` rounded-lg py-0.5 font-medium  w-1/2 px-4 font-poppins ${
                             item.flag === 0
                               ? "text-blue-900 bg-blue-300"
                               : "text-red-900 bg-red-500 bg-opacity-40"
@@ -306,7 +307,7 @@ const Dashboard = ({ onReportClick }) => {
                           className={`flex flex-row gap-1 items-center justify-end px-4 w-1/2 `}
                         >
                           <div
-                            className={`text-base font-medium border-b-2 border-blue-gray-500 cursor-pointer`}
+                            className={`text-base font-medium border-b-2 border-blue-gray-500 cursor-pointer font-poppins`}
                             onClick={() => onReportClick(item.patient_id)}
                           >
                             Report
@@ -344,15 +345,15 @@ const Dashboard = ({ onReportClick }) => {
                     <div className={`w-2/3 h-full flex flex-col py-2`}>
                       <div className="flex w-full flex-col gap-2">
                         <div className="flex items-center justify-between">
-                          <Typography variant="h5" color="blue-gray">
+                          <Typography variant="h5" color="blue-gray" className="font-poppins">
                           {item.user_id}
                           </Typography>
                         </div>
-                        <Typography color="blue-gray" className="text-start">
+                        <Typography color="blue-gray" className="text-start font-poppins">
                         25,{item.PersonalDetails.PatientDetails.Gender}
                         </Typography>
                         <div
-                          className={`h-1/6 w-full text-base font-medium text-start`}
+                          className={`h-1/6 w-full text-base font-medium text-start font-poppins`}
                         >
                           ID: #{item.user_id[0]}
                       {item.user_id[1]}
@@ -361,7 +362,7 @@ const Dashboard = ({ onReportClick }) => {
                         </div>
                         <div className={`h-2/6 w-full flex flex-row  `}>
                           <div
-                            className={` rounded-lg py-0.5 font-medium  w-1/2 px-4 ${
+                            className={` rounded-lg py-0.5 font-medium  w-1/2 px-4 font-poppins ${
                               item.flag === 0
                                 ? "text-blue-900 bg-blue-300"
                                 : "text-red-900 bg-red-500 bg-opacity-40"
@@ -373,7 +374,7 @@ const Dashboard = ({ onReportClick }) => {
                             className={`flex flex-row gap-1 items-center justify-end px-4 w-1/2 `}
                           >
                             <div
-                              className={`text-base font-medium border-b-2 border-blue-gray-500 cursor-pointer`}
+                              className={`text-base font-medium border-b-2 border-blue-gray-500 cursor-pointer font-poppins`}
                               onClick={() => onReportClick(item.patient_id)}
                             >
                               Report
@@ -413,15 +414,15 @@ const Dashboard = ({ onReportClick }) => {
                     >
                       <div className="flex w-full flex-col gap-2 justify-center items-center">
                         <div className="flex items-center justify-between">
-                          <Typography variant="h5" color="blue-gray">
+                          <Typography variant="h5" color="blue-gray" className="font-poppins">
                           {item.user_id}
                           </Typography>
                         </div>
-                        <Typography color="blue-gray" className="text-center">
+                        <Typography color="blue-gray" className="text-center font-poppins">
                         25,{item.PersonalDetails.PatientDetails.Gender}
                         </Typography>
                         <div
-                          className={` w-full text-base font-medium text-center`}
+                          className={` w-full text-base font-medium text-center font-poppins`}
                         >
                           ID: #{item.user_id[0]}
                       {item.user_id[1]}
@@ -430,7 +431,7 @@ const Dashboard = ({ onReportClick }) => {
                         </div>
                         <div className={`w-full flex flex-row px-6`}>
                           <div
-                            className={` rounded-lg py-0.5 font-medium  w-1/2  ${
+                            className={` rounded-lg py-0.5 font-medium  w-1/2 font-poppins ${
                               item.flag === 0
                                 ? "text-blue-900 bg-blue-300"
                                 : "text-red-900 bg-red-500 bg-opacity-40"
@@ -474,13 +475,17 @@ const Dashboard = ({ onReportClick }) => {
               }`}
             >
               <div
-                className={`h-1/6 w-full  flex items-center py-8 ${
-                  screenWidth < 1180 ? "justify-center" : ""
+                className={`h-1/6 w-full  flex flex-row items-center py-8 ${
+                  screenWidth < 1180 ? "justify-center" : "justify-between"
                 }`}
               >
-                <Typography variant="h4" color="black" className="text-start">
+                <Typography variant="h4" color="black" className="text-start font-poppins">
                   Patients
                 </Typography>
+                <div className={`flex flex-row font-poppins items-center gap-2 text-sm bg-gray-50 rounded-lg py-1 px-2`}>
+                  2024
+                  <ChevronDownIcon color="gray" className={`w-3 h-3`}/>
+                </div>
               </div>
               <div
                 className={`h-5/6  gap-4 w-full  ${
@@ -494,15 +499,15 @@ const Dashboard = ({ onReportClick }) => {
                 <Card
                   color="transparent"
                   shadow={true}
-                  className={` bg-gradient-to-br from-light-blue-100 to-white flex flex-col justify-center items-center my-1 py-1 ${
+                  className={` bg-gradient-to-br from-light-blue-50 via-light-blue-50 to-white flex flex-col justify-center items-center my-1 py-1 ${
                     screenWidth < 1180 ? "w-3/4 h-1/2" : "w-1/2"
                   }`}
                 >
-                  <div className="w-full h-1/4 font-semibold text-black text-lg">
+                  <div className="w-full h-1/4 font-semibold text-black text-lg font-poppins">
                     Patients Assigned
                   </div>
                   <div className="w-full h-3/4 flex flex-row items-center">
-                    <div className="w-1/2 text-5xl text-black font-bold">
+                    <div className="w-1/2 text-5xl text-black font-semibold font-poppins">
                       {flagZeroCount}
                     </div>
                     <div className="w-1/2 flex justify-center">
@@ -513,15 +518,15 @@ const Dashboard = ({ onReportClick }) => {
                 <Card
                   color="transparent"
                   shadow={true}
-                  className={`bg-gradient-to-br from-red-100 to-white flex flex-col justify-center items-center my-1 py-1 ${
+                  className={`bg-gradient-to-br from-red-100 via-red-50 to-white flex flex-col justify-center items-center my-1 py-1 ${
                     screenWidth < 1180 ? "w-3/4 h-1/2" : "w-1/2"
                   }`}
                 >
-                  <div className="w-full h-1/4 font-semibold text-black text-lg">
+                  <div className="w-full h-1/4 font-semibold text-black text-lg font-poppins">
                     Patients Pending
                   </div>
                   <div className="w-full h-3/4 flex flex-row items-center">
-                    <div className="w-1/2 text-5xl text-black font-bold">
+                    <div className="w-1/2 text-5xl text-black font-semibold font-poppins">
                       {flagMinusOneCount}
                     </div>
                     <div className="w-1/2 flex justify-center">
@@ -537,7 +542,7 @@ const Dashboard = ({ onReportClick }) => {
                   screenWidth < 1180 ? "py-8 justify-center" : ""
                 }`}
               >
-                <Typography variant="h4" color="black" className="text-start">
+                <Typography variant="h4" color="black" className="text-start font-poppins">
                   Doctors Availabe
                 </Typography>
               </div>
@@ -556,11 +561,11 @@ const Dashboard = ({ onReportClick }) => {
                           alt="tania andrew"
                         />
                       </div>
-                      <div className="w-2/3 h-full flex flex-col  justify-center">
+                      <div className="w-2/3 h-full flex flex-col  justify-center font-poppins">
                         <Typography variant="h6" color="blue-gray">
                           {item.name}
                         </Typography>
-                        <Typography variant="h7" color="black">
+                        <Typography variant="h7" color="black" className="font-poppins">
                           {item.user_id}
                         </Typography>
                       </div>
@@ -583,11 +588,11 @@ const Dashboard = ({ onReportClick }) => {
                           alt="tania andrew"
                         />
                       </div>
-                      <div className="h-2/3 w-full flex flex-col  justify-center">
+                      <div className="h-2/3 w-full flex flex-col  justify-center font-poppins\">
                         <Typography variant="h6" color="blue-gray">
                           {item.name}
                         </Typography>
-                        <Typography variant="h7" color="black">
+                        <Typography variant="h7" color="black" className="font-poppins">
                           {item.user_id}
                         </Typography>
                       </div>

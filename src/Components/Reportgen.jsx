@@ -167,7 +167,7 @@ const Reportgen = () => {
         <div
           className={`w-full h-16 flex flex-row items-center  ${screenWidth<460?"justify-center":"px-8"}`}
         >
-          <Typography variant="h3" color="blue-gray">
+          <Typography variant="h3" color="blue-gray" className="font-poppins">
             List of Patients
           </Typography>
         </div>
@@ -192,17 +192,17 @@ const Reportgen = () => {
                     />
                     <div className="flex w-full flex-col">
                       <div className="flex items-center justify-between">
-                        <Typography variant="h5" color="blue-gray">
+                        <Typography variant="h5" color="blue-gray" className="font-poppins">
                           {item.user_id}
                         </Typography>
                       </div>
-                      <Typography color="blue-gray" className="text-start">
+                      <Typography color="blue-gray" className="text-start font-poppins">
                         25,{item.PersonalDetails.PatientDetails.Gender}
                       </Typography>
                     </div>
                   </div>
                 </div>
-                <div className={`w-1/6 text-base text-center font-medium`}>
+                <div className={`w-1/6 text-base text-center font-medium font-poppins`}>
                   ID: #{item.user_id[0]}
                       {item.user_id[1]}
                       {item.user_id[2]}-
@@ -213,7 +213,7 @@ const Reportgen = () => {
                     className={`flex flex-row gap-1 items-center justify-end px-4 w-full `}
                   >
                     <div
-                      className={`text-base font-medium border-b-2 border-blue-gray-500 cursor-pointer`}
+                      className={`text-base font-medium border-b-2 border-blue-gray-500 cursor-pointer font-poppins`}
                     >
                       Create Report
                     </div>
@@ -244,11 +244,11 @@ const Reportgen = () => {
                     />
                     <div className="flex w-full flex-col">
                       <div className="flex items-center justify-between">
-                        <Typography variant="h5" color="blue-gray">
+                        <Typography variant="h5" color="blue-gray" className="font-poppins">
                           {item.name}
                         </Typography>
                       </div>
-                      <Typography color="blue-gray" className="text-start">
+                      <Typography color="blue-gray" className="text-start font-poppins">
                         {item.age},{item.gender}
                       </Typography>
                     </div>
@@ -265,7 +265,7 @@ const Reportgen = () => {
                       className={`flex flex-row gap-1 items-center justify-center px-4 w-full `}
                     >
                       <div
-                        className={`text-base font-medium border-b-2 border-blue-gray-500 cursor-pointer`}
+                        className={`text-base font-medium border-b-2 border-blue-gray-500 cursor-pointer font-poppins`}
                       >
                         Create Report
                       </div>
@@ -300,15 +300,15 @@ const Reportgen = () => {
                 <div className={`w-2/3 h-full flex flex-col py-2 gap-2`}>
                   <div className="flex w-full flex-col">
                     <div className="flex items-center justify-between">
-                      <Typography variant="h5" color="blue-gray">
+                      <Typography variant="h5" color="blue-gray" className="font-poppins">
                         {item.name}
                       </Typography>
                     </div>
-                    <Typography color="blue-gray" className="text-start">
+                    <Typography color="blue-gray" className="text-start font-poppins">
                       {item.age},{item.gender}
                     </Typography>
                   </div>
-                  <div className={`w-full text-base text-start font-medium`}>
+                  <div className={`w-full text-base text-start font-medium font-poppins`}>
                     ID: {item.id}
                   </div>
                   <div className={`w-full  flex flex-row justify-end`}>
@@ -316,7 +316,7 @@ const Reportgen = () => {
                       className={`flex flex-row gap-1 items-center justify-start w-full `}
                     >
                       <div
-                        className={`text-base font-medium border-b-2 border-blue-gray-500 cursor-pointer`}
+                        className={`text-base font-medium border-b-2 border-blue-gray-500 cursor-pointer font-poppins`}
                       >
                         Create Report
                       </div>
@@ -350,15 +350,15 @@ const Reportgen = () => {
                 <div className={`w-full h-full flex flex-col py-2 gap-2`}>
                   <div className="flex w-full flex-col items-center">
                     <div className="flex items-center justify-between">
-                      <Typography variant="h5" color="blue-gray">
+                      <Typography variant="h5" color="blue-gray" className="font-poppins">
                         {item.name}
                       </Typography>
                     </div>
-                    <Typography color="blue-gray" className="text-start">
+                    <Typography color="blue-gray" className="text-start font-poppins">
                       {item.age},{item.gender}
                     </Typography>
                   </div>
-                  <div className={`w-full text-base text-center font-medium`}>
+                  <div className={`w-full text-base text-center font-medium font-poppins`}>
                     ID: {item.id}
                   </div>
                   <div className={`w-full  flex flex-row justify-end`}>
@@ -366,7 +366,7 @@ const Reportgen = () => {
                       className={`flex flex-row gap-1 items-center justify-center w-full `}
                     >
                       <div
-                        className={`text-base font-medium border-b-2 border-blue-gray-500 cursor-pointer`}
+                        className={`text-base font-medium border-b-2 border-blue-gray-500 cursor-pointer font-poppins`}
                       >
                         Create Report
                       </div>
