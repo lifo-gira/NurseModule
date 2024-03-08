@@ -84,7 +84,7 @@ const CustomBar1 = (props) => {
   );
 };
 
-const Report = ({ onDashboard, userId,assement }) => {
+const Report = ({ onDashboard, userId,onAssessmentClick }) => {
   const [selectedOption, setSelectedOption] = useState("");
   const options = ["Option 1", "Option 2", "Option 3"];
 
@@ -103,7 +103,7 @@ const Report = ({ onDashboard, userId,assement }) => {
   const [patientDetails, setpatientDetails] = useState([]);
   const [report, setreport] = useState([]);
   const [documentId, setdocumentId] = useState([]);
-
+  const [exerciseData, setExerciseData] = useState({});
   useEffect(() => {
     const fetchPatientInfo = async () => {
       try {
@@ -122,17 +122,13 @@ const Report = ({ onDashboard, userId,assement }) => {
           setpatientDetails(newPatientDetailsData);
           setdocumentId(data._id);
           setreport(newReportData);
-          const runningExerciseData = data?.Exercises?.running.values || [];
-          const squatsExerciseData = data?.Exercises?.squats.values || [];
-          const pushupsExerciseData = data?.Exercises?.pushups.values || [];
-          const pullupsExerciseData = data?.Exercises?.pullups.values || [];
-          const leghipExerciseData =
-            data?.Exercises?.LegHipRotation.values || [];
-          setRunningData(runningExerciseData.map((value) => parseFloat(value)));
-          setsquatsData(squatsExerciseData.map((value) => parseFloat(value)));
-          setpushupsData(pushupsExerciseData.map((value) => parseFloat(value)));
-          setpullupsData(pullupsExerciseData.map((value) => parseFloat(value)));
-          setleghipData(leghipExerciseData.map((value) => parseFloat(value)));
+          const parsedExerciseData = data.Exercises.data.map((exercise) => ({
+            name: exercise.name,
+            values: exercise.values.map((value) => parseFloat(value)),
+          }));
+
+          console.log("Parsed exercise data:", parsedExerciseData);
+          setExerciseData(parsedExerciseData);
         } else {
           setError(data.detail || "Failed to fetch patient information");
         }
@@ -146,23 +142,29 @@ const Report = ({ onDashboard, userId,assement }) => {
     fetchPatientInfo();
   }, [userId]);
 
-  useEffect(() => {
-    setPatients(patients);
-    setpatientDetails(patientDetails);
-    setreport(report);
-    setdocumentId(documentId);
-    console.log("UserId:", documentId);
-    console.log(report);
-  }, [patients, patientDetails, report, documentId]);
+  const formattedData = Object.values(exerciseData).flatMap((exercise) =>
+    exercise.values.map((value, index) => ({
+      index: index,
+      [exercise.name]: value,
+    }))
+  );
 
-  const combinedChartData = runningData.map((value, index) => ({
-    name: ` ${index + 1}`,
-    Running: value,
-    Squats: squatsData[index],
-    Pushups: pushupsData[index],
-    Pullups: pullupsData[index],
-    LegHipRotation: leghipData[index],
+  // Group the points by index
+  const groupedData = formattedData.reduce((grouped, item) => {
+    const { index, ...rest } = item;
+    if (!grouped[index]) {
+      grouped[index] = {};
+    }
+    Object.assign(grouped[index], rest);
+    return grouped;
+  }, {});
+
+  // Convert grouped data back to an array of objects
+  const finalData = Object.entries(groupedData).map(([index, values]) => ({
+    index: parseInt(index), // Convert index back to integer if needed
+    ...values,
   }));
+  console.log(finalData);
 
   const [users, setUsers] = useState([]);
 
@@ -571,7 +573,7 @@ const Report = ({ onDashboard, userId,assement }) => {
               
             </div>
             <div className={`w-1/6`}>
-            <Button className="w-full h-full items-center justify-center gap-2 font-poppins flex flex-col" onClick={assement}>
+            <Button className="w-full h-full items-center justify-center gap-2 font-poppins flex flex-col" onClick={() => onAssessmentClick(patients.patient_id)}>
                   <svg
                     xmlns="http://www.w3.org/2000/svg"
                     fill="none"
@@ -1565,36 +1567,34 @@ const Report = ({ onDashboard, userId,assement }) => {
                 Patient Analytics
               </Typography>
               <div className="w-full h-full">
-                <ResponsiveContainer width="100%" height="100%">
-                  <LineChart
-                    width={700}
-                    height={700}
-                    data={data5}
-                    margin={{
-                      top: 10,
-                      right: 30,
-                      left: -10,
-                      bottom: 0,
-                    }}
-                  >
-                    <XAxis dataKey="name" />
-                    <YAxis />
-                    <Tooltip />
-                    <Line
-                      type="monotone"
-                      dataKey="pv"
-                      stroke="#8884d8"
-                      strokeWidth={4}
-                      strokeDasharray={"25 4"}
-                    />
-                    <Line
-                      type="monotone"
-                      dataKey="uv"
-                      stroke="#82ca9d"
-                      strokeWidth={4}
-                    />
-                  </LineChart>
-                </ResponsiveContainer>
+              <ResponsiveContainer width="100%" height="100%">
+              <LineChart
+                width={500}
+                height={300}
+                data={finalData}
+                margin={{ top: 5, right: 30, left: 20, bottom: 5 }}
+              >
+                <CartesianGrid strokeDasharray="3 3" />
+                <XAxis dataKey="index" />
+                <YAxis />
+                <Tooltip />
+                {/* Conditional rendering of Line components */}
+                {finalData.length > 0 &&
+                  Object.keys(finalData[0])
+                    .filter((key) => key !== "index") // Exclude the 'index' key
+                    .map((exerciseName, index) => (
+                      <Line
+                        key={index}
+                        type="monotone"
+                        dataKey={exerciseName}
+                        stroke={`#${Math.floor(
+                          Math.random() * 16777215
+                        ).toString(16)}`}
+                        strokeWidth={4}
+                      />
+                    ))}
+              </LineChart>
+            </ResponsiveContainer>
               </div>
             </Card>
           </div>

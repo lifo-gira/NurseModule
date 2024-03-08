@@ -533,12 +533,12 @@ const Profilebar = () => {
             <Report
               userId={userID}
               onDashboard={() => handleMenuItemClick("Dashboard")}
-              assement={()=>handleMenuItemClick("Assessment")}
+              onAssessmentClick={(patientId) => handleMenuItemClick("Assessment",patientId)}
             />
           )}
           {activeMenuItem === "Assessment" && (
             <Assessment
-              userId={userID}
+            userId={userID} onDashboard={()=> handleMenuItemClick("Dashboard")}
             />
           )}
         </div>
