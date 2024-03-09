@@ -110,7 +110,7 @@ const Report = ({ onDashboard, userId,onAssessmentClick }) => {
     const fetchPatientInfo = async () => {
       try {
         const response = await fetch(
-          `http://127.0.0.1:8000/patient-info/${userId}`
+          `https://api-backup-vap2.onrender.com/patient-info/${userId}`
         );
         const data = await response.json();
 
@@ -213,7 +213,7 @@ const Report = ({ onDashboard, userId,onAssessmentClick }) => {
 
     async function fetchUsers() {
       try {
-        const response = await fetch("http://127.0.0.1:8000/users");
+        const response = await fetch("https://api-backup-vap2.onrender.com/users");
         if (!response.ok) {
           throw new Error("Failed to fetch data");
         }
@@ -467,7 +467,7 @@ const Report = ({ onDashboard, userId,onAssessmentClick }) => {
   ) => {
     console.log(doctorName);
     fetch(
-      `http://127.0.0.1:8000/update_flag/${patient_id}/${newFlag}/${doctorName}/${doctorID}/${scheduled_date}/${meeting_id}`,
+      `https://api-backup-vap2.onrender.com/update_flag/${patient_id}/${newFlag}/${doctorName}/${doctorID}/${scheduled_date}/${meeting_id}`,
       {
         method: "PUT",
         headers: {
