@@ -46,7 +46,9 @@ const Dashboard = ({ onReportClick }) => {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const response = await fetch("http://127.0.0.1:8000/patient-details/all");
+        const response = await fetch(
+          "http://127.0.0.1:8000/patient-details/all"
+        );
         if (!response.ok) {
           throw new Error("Failed to fetch data");
         }
@@ -55,8 +57,10 @@ const Dashboard = ({ onReportClick }) => {
         setLoading(false);
 
         // Count occurrences of flag == -1 and flag == 0
-        const minusOneCount = data.filter(patient => patient.flag === -1).length;
-        const zeroCount = data.filter(patient => patient.flag === 0).length;
+        const minusOneCount = data.filter(
+          (patient) => patient.flag === -1
+        ).length;
+        const zeroCount = data.filter((patient) => patient.flag === 0).length;
 
         setFlagMinusOneCount(minusOneCount);
         setFlagZeroCount(zeroCount);
@@ -70,35 +74,32 @@ const Dashboard = ({ onReportClick }) => {
 
     fetchData();
   }, []);
-  
 
   const [users, setUsers] = useState([]);
 
   useEffect(() => {
     let fetchCount = 0;
-  
+
     async function fetchUsers() {
       try {
-        const response = await fetch('http://127.0.0.1:8000/users');
+        const response = await fetch("http://127.0.0.1:8000/users");
         if (!response.ok) {
-          throw new Error('Failed to fetch data');
+          throw new Error("Failed to fetch data");
         }
         const data = await response.json();
-        const doctors = data.filter(user => user.type === 'doctor');
+        const doctors = data.filter((user) => user.type === "doctor");
         setUsers(doctors);
         fetchCount++;
         console.log(doctors); // Log fetched data for doctors
       } catch (error) {
-        console.error('Error fetching data:', error);
+        console.error("Error fetching data:", error);
       }
     }
-  
+
     if (fetchCount < 2) {
       fetchUsers();
     }
   }, []);
-  
-  
 
   useEffect(() => {
     setPatients(patients);
@@ -153,6 +154,14 @@ const Dashboard = ({ onReportClick }) => {
     };
   }, []);
 
+  const dat = [
+    { name: "Inbasekar S", prof: "Ortho Surgeon" },
+    { name: "Inbasekar S", prof: "Ortho Surgeon" },
+    { name: "Inbasekar S", prof: "Ortho Surgeon" },
+    { name: "Inbasekar S", prof: "Ortho Surgeon" },
+    { name: "Inbasekar S", prof: "Ortho Surgeon" },
+  ];
+
   return (
     <>
       {false ? (
@@ -165,7 +174,7 @@ const Dashboard = ({ onReportClick }) => {
         >
           <div
             className={`h-full  px-4 ${
-              screenWidth < 1180 ? "w-full" : "w-3/5"
+              screenWidth < 1180 ? "w-full" : "w-4/6"
             }`}
           >
             <div
@@ -175,7 +184,11 @@ const Dashboard = ({ onReportClick }) => {
                   : "h-16 flex flex-row justify-between"
               }`}
             >
-              <Typography variant="h3" color="blue-gray" className="font-poppins">
+              <Typography
+                variant="h3"
+                color="blue-gray"
+                className="font-poppins"
+              >
                 List of Patients
               </Typography>
               <div
@@ -210,11 +223,18 @@ const Dashboard = ({ onReportClick }) => {
                         />
                         <div className="flex w-full flex-col">
                           <div className="flex items-center justify-between">
-                            <Typography variant="h5" color="blue-gray" className="font-poppins">
+                            <Typography
+                              variant="h5"
+                              color="blue-gray"
+                              className="font-poppins"
+                            >
                               {item.user_id}
                             </Typography>
                           </div>
-                          <Typography color="blue-gray" className="text-start font-poppins">
+                          <Typography
+                            color="blue-gray"
+                            className="text-start font-poppins"
+                          >
                             25,{item.PersonalDetails.PatientDetails.Gender}
                           </Typography>
                         </div>
@@ -274,12 +294,19 @@ const Dashboard = ({ onReportClick }) => {
                         />
                         <div className="flex w-full flex-col gap-4">
                           <div className="flex items-center justify-between">
-                            <Typography variant="h5" color="blue-gray" className="font-poppins">
-                            {item.user_id}
+                            <Typography
+                              variant="h5"
+                              color="blue-gray"
+                              className="font-poppins"
+                            >
+                              {item.user_id}
                             </Typography>
                           </div>
-                          <Typography color="blue-gray" className="text-start font-poppins">
-                          25,{item.PersonalDetails.PatientDetails.Gender}
+                          <Typography
+                            color="blue-gray"
+                            className="text-start font-poppins"
+                          >
+                            25,{item.PersonalDetails.PatientDetails.Gender}
                           </Typography>
                         </div>
                       </div>
@@ -289,9 +316,9 @@ const Dashboard = ({ onReportClick }) => {
                         className={`h-1/6 w-full text-base font-medium text-start font-poppins`}
                       >
                         ID: #{item.user_id[0]}
-                      {item.user_id[1]}
-                      {item.user_id[2]}-
-                      {item.PersonalDetails.PatientDetails.Gender[0]}
+                        {item.user_id[1]}
+                        {item.user_id[2]}-
+                        {item.PersonalDetails.PatientDetails.Gender[0]}
                       </div>
                       <div className={`h-2/6 w-full flex flex-row  `}>
                         <div
@@ -345,20 +372,27 @@ const Dashboard = ({ onReportClick }) => {
                     <div className={`w-2/3 h-full flex flex-col py-2`}>
                       <div className="flex w-full flex-col gap-2">
                         <div className="flex items-center justify-between">
-                          <Typography variant="h5" color="blue-gray" className="font-poppins">
-                          {item.user_id}
+                          <Typography
+                            variant="h5"
+                            color="blue-gray"
+                            className="font-poppins"
+                          >
+                            {item.user_id}
                           </Typography>
                         </div>
-                        <Typography color="blue-gray" className="text-start font-poppins">
-                        25,{item.PersonalDetails.PatientDetails.Gender}
+                        <Typography
+                          color="blue-gray"
+                          className="text-start font-poppins"
+                        >
+                          25,{item.PersonalDetails.PatientDetails.Gender}
                         </Typography>
                         <div
                           className={`h-1/6 w-full text-base font-medium text-start font-poppins`}
                         >
                           ID: #{item.user_id[0]}
-                      {item.user_id[1]}
-                      {item.user_id[2]}-
-                      {item.PersonalDetails.PatientDetails.Gender[0]}
+                          {item.user_id[1]}
+                          {item.user_id[2]}-
+                          {item.PersonalDetails.PatientDetails.Gender[0]}
                         </div>
                         <div className={`h-2/6 w-full flex flex-row  `}>
                           <div
@@ -414,20 +448,27 @@ const Dashboard = ({ onReportClick }) => {
                     >
                       <div className="flex w-full flex-col gap-2 justify-center items-center">
                         <div className="flex items-center justify-between">
-                          <Typography variant="h5" color="blue-gray" className="font-poppins">
-                          {item.user_id}
+                          <Typography
+                            variant="h5"
+                            color="blue-gray"
+                            className="font-poppins"
+                          >
+                            {item.user_id}
                           </Typography>
                         </div>
-                        <Typography color="blue-gray" className="text-center font-poppins">
-                        25,{item.PersonalDetails.PatientDetails.Gender}
+                        <Typography
+                          color="blue-gray"
+                          className="text-center font-poppins"
+                        >
+                          25,{item.PersonalDetails.PatientDetails.Gender}
                         </Typography>
                         <div
                           className={` w-full text-base font-medium text-center font-poppins`}
                         >
                           ID: #{item.user_id[0]}
-                      {item.user_id[1]}
-                      {item.user_id[2]}-
-                      {item.PersonalDetails.PatientDetails.Gender[0]}
+                          {item.user_id[1]}
+                          {item.user_id[2]}-
+                          {item.PersonalDetails.PatientDetails.Gender[0]}
                         </div>
                         <div className={`w-full flex flex-row px-6`}>
                           <div
@@ -466,7 +507,7 @@ const Dashboard = ({ onReportClick }) => {
                 ? "w-full flex flex-col"
                 : screenWidth < 520
                 ? "w-full"
-                : " w-2/5 flex flex-col px-4 pb-14 gap-4"
+                : " w-2/6 flex flex-col px-4 pb-5 gap-4"
             }`}
           >
             <div
@@ -479,12 +520,18 @@ const Dashboard = ({ onReportClick }) => {
                   screenWidth < 1180 ? "justify-center" : "justify-between"
                 }`}
               >
-                <Typography variant="h4" color="black" className="text-start font-poppins">
+                <Typography
+                  variant="h4"
+                  color="black"
+                  className="text-start font-poppins"
+                >
                   Patients
                 </Typography>
-                <div className={`flex flex-row font-poppins items-center gap-2 text-sm bg-gray-50 rounded-lg py-1 px-2`}>
+                <div
+                  className={`flex flex-row font-poppins items-center gap-2 text-sm bg-gray-50 rounded-lg py-1 px-2`}
+                >
                   2024
-                  <ChevronDownIcon color="gray" className={`w-3 h-3`}/>
+                  <ChevronDownIcon color="gray" className={`w-3 h-3`} />
                 </div>
               </div>
               <div
@@ -542,13 +589,17 @@ const Dashboard = ({ onReportClick }) => {
                   screenWidth < 1180 ? "py-8 justify-center" : ""
                 }`}
               >
-                <Typography variant="h4" color="black" className="text-start font-poppins">
+                <Typography
+                  variant="h4"
+                  color="black"
+                  className="text-start font-poppins"
+                >
                   Doctors Availabe
                 </Typography>
               </div>
               {screenWidth >= 1180 && (
-                <div className="w-full h-5/6 px-12 pb-1  flex flex-col overflow-y-auto scrollbar-thin scrollbar-thumb-blue-400 scrollbar-track-transparent scrollbar-thumb-rounded-2xl gap-4">
-                  {users.map((item, index) => (
+                <Card className="w-full h-5/6 py-2  flex flex-col overflow-y-auto scrollbar-thin scrollbar-thumb-blue-400 scrollbar-track-transparent scrollbar-thumb-rounded-2xl gap-2">
+                  {/* {dat.map((item, index) => (
                     <Card
                       className="w-full h-full flex flex-row items-center justify-center py-3 px-8"
                       key={index}
@@ -566,12 +617,227 @@ const Dashboard = ({ onReportClick }) => {
                           {item.name}
                         </Typography>
                         <Typography variant="h7" color="black" className="font-poppins">
-                          {item.user_id}
+                          {item.prof}
                         </Typography>
                       </div>
                     </Card>
-                  ))}
-                </div>
+                  ))} */}
+                  <div className={`w-full h-1/3 flex flex-row`}>
+                    <div className={`w-1/3 h-full`}>
+                      <div className="w-full h-1/2 flex justify-center items-center">
+                        <Avatar
+                          size="md"
+                          variant="circular"
+                          src="https://images.unsplash.com/photo-1612349317150-e413f6a5b16d?q=80&w=2070&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
+                          alt="tania andrew"
+                        />
+                      </div>
+                      <div className="w-full h-1/2 flex flex-col  justify-center font-poppins">
+                        <Typography
+                          variant="h6"
+                          color="blue-gray"
+                          className={`font-poppins text-xs`}
+                        >
+                          Dr. James Williams
+                        </Typography>
+                        <Typography
+                          variant="h7"
+                          color="black"
+                          className={`font-poppins text-xs`}
+                        >
+                          Ortho Surgeon
+                        </Typography>
+                      </div>
+                    </div>
+                    <div className={`w-1/3 h-full`}>
+                    <div className="w-full h-1/2 flex justify-center items-center">
+                        <Avatar
+                          size="md"
+                          variant="circular"
+                          src="https://images.unsplash.com/photo-1651008376811-b90baee60c1f?q=80&w=1887&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
+                          alt="tania andrew"
+                          className="object-cover"
+                        />
+                      </div>
+                      <div className="w-full h-1/2 flex flex-col  justify-center font-poppins">
+                        <Typography
+                          variant="h6"
+                          color="blue-gray"
+                          className={`font-poppins text-xs`}
+                        >
+                          Dr. Jermy Alford
+                        </Typography>
+                        <Typography
+                          variant="h7"
+                          color="black"
+                          className={`font-poppins text-xs`}
+                        >
+                          Ortho Surgeon
+                        </Typography>
+                      </div>
+                    </div>
+                    <div className={`w-1/3 h-full`}>
+                    <div className="w-full h-1/2 flex justify-center items-center">
+                        <Avatar
+                          size="md"
+                          variant="circular"
+                          src="https://images.unsplash.com/photo-1559839734-2b71ea197ec2?q=80&w=2070&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
+                          alt="tania andrew"
+                        />
+                      </div>
+                      <div className="w-full h-1/2 flex flex-col  justify-center font-poppins">
+                        <Typography
+                          variant="h6"
+                          color="blue-gray"
+                          className={`font-poppins text-xs`}
+                        >
+                          Dr. Susan Jacob
+                        </Typography>
+                        <Typography
+                          variant="h7"
+                          color="black"
+                          className={`font-poppins text-xs`}
+                        >
+                          Ortho Surgeon
+                        </Typography>
+                      </div>
+                    </div>
+                  </div>
+                  <div className={`w-full h-1/3 flex flex-row`}>
+                    <div className={`w-1/2 h-full`}>
+                    <div className="w-full h-1/2 flex justify-center items-center">
+                        <Avatar
+                          size="md"
+                          variant="circular"
+                          src="https://plus.unsplash.com/premium_photo-1661764878654-3d0fc2eefcca?q=80&w=1887&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
+                          alt="tania andrew"
+                        />
+                      </div>
+                      <div className="w-full h-1/2 flex flex-col  justify-center font-poppins">
+                        <Typography
+                          variant="h6"
+                          color="blue-gray"
+                          className={`font-poppins text-xs`}
+                        >
+                          Dr. Ling Chan
+                        </Typography>
+                        <Typography
+                          variant="h7"
+                          color="black"
+                          className={`font-poppins text-xs`}
+                        >
+                          Ortho Surgeon
+                        </Typography>
+                      </div>
+                    </div>
+                    <div className={`w-1/2 h-full`}>
+                    <div className="w-full h-1/2 flex justify-center items-center">
+                        <Avatar
+                          size="md"
+                          variant="circular"
+                          src="https://images.unsplash.com/photo-1594824476967-48c8b964273f?q=80&w=1887&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
+                          alt="tania andrew"
+                        />
+                      </div>
+                      <div className="w-full h-1/2 flex flex-col  justify-center font-poppins">
+                        <Typography
+                          variant="h6"
+                          color="blue-gray"
+                          className={`font-poppins text-xs`}
+                        >
+                          Dr. Marie Mcarthy
+                        </Typography>
+                        <Typography
+                          variant="h7"
+                          color="black"
+                          className={`font-poppins text-xs`}
+                        >
+                          Ortho Surgeon
+                        </Typography>
+                      </div>
+                    </div>
+                  </div>
+                  <div className={`w-full h-1/3 flex flex-row`}>
+                    <div className={`w-1/3 h-full`}>
+                    <div className="w-full h-1/2 flex justify-center items-center">
+                        <Avatar
+                          size="md"
+                          variant="circular"
+                          src="https://plus.unsplash.com/premium_photo-1681996484614-6afde0d53071?q=80&w=2070&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
+                          alt="tania andrew"
+                        />
+                      </div>
+                      <div className="w-full h-1/2 flex flex-col  justify-center font-poppins">
+                        <Typography
+                          variant="h6"
+                          color="blue-gray"
+                          className={`font-poppins text-xs`}
+                        >
+                          Dr. Jones
+                        </Typography>
+                        <Typography
+                          variant="h7"
+                          color="black"
+                          className={`font-poppins text-xs`}
+                        >
+                          Ortho Surgeon
+                        </Typography>
+                      </div>
+                    </div>
+                    <div className={`w-1/3 h-full`}>
+                    <div className="w-full h-1/2 flex justify-center items-center">
+                        <Avatar
+                          size="md"
+                          variant="circular"
+                          src="https://plus.unsplash.com/premium_photo-1661766718556-13c2efac1388?q=80&w=1974&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
+                          alt="tania andrew"
+                        />
+                      </div>
+                      <div className="w-full h-1/2 flex flex-col  justify-center font-poppins">
+                        <Typography
+                          variant="h6"
+                          color="blue-gray"
+                          className={`font-poppins text-xs`}
+                        >
+                          Dr. Sofie Richard
+                        </Typography>
+                        <Typography
+                          variant="h7"
+                          color="black"
+                          className={`font-poppins text-xs`}
+                        >
+                          Ortho Surgeon
+                        </Typography>
+                      </div>
+                    </div>
+                    <div className={`w-1/3 h-full`}>
+                    <div className="w-full h-1/2 flex justify-center items-center">
+                        <Avatar
+                          size="md"
+                          variant="circular"
+                          src="https://plus.unsplash.com/premium_photo-1658506671316-0b293df7c72b?q=80&w=2070&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
+                          alt="tania andrew"
+                        />
+                      </div>
+                      <div className="w-full h-1/2 flex flex-col  justify-center font-poppins">
+                        <Typography
+                          variant="h6"
+                          color="blue-gray"
+                          className={`font-poppins text-xs`}
+                        >
+                          Dr. Andrew Lin
+                        </Typography>
+                        <Typography
+                          variant="h7"
+                          color="black"
+                          className={`font-poppins text-xs`}
+                        >
+                          Ortho Surgeon
+                        </Typography>
+                      </div>
+                    </div>
+                  </div>
+                </Card>
               )}
               {screenWidth < 1180 && (
                 <div className="w-full h-full px-8 pb-1  flex flex-row overflow-x-auto scrollbar-thin scrollbar-thumb-blue-400 scrollbar-track-transparent scrollbar-thumb-rounded-2xl gap-4">
@@ -592,7 +858,11 @@ const Dashboard = ({ onReportClick }) => {
                         <Typography variant="h6" color="blue-gray">
                           {item.name}
                         </Typography>
-                        <Typography variant="h7" color="black" className="font-poppins">
+                        <Typography
+                          variant="h7"
+                          color="black"
+                          className="font-poppins"
+                        >
                           {item.user_id}
                         </Typography>
                       </div>
